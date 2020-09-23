@@ -13,14 +13,15 @@ export const Search = ({controls}) => {
     }
     
     return (
-        <div>
+        <div className="search__container">
             <input
-                className="search"
+                className="search__form"
                 type="text"
                 placeholder="Search"
                 value={searchInput}
                 onChange={e => setSearchInput(e.target.value)}
             />
+            <i></i>
             <button onClick={handleSubmit}>Ok</button>
             <button onClick={handleCancel}>Cancel</button>
         </div>
