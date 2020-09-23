@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Search, Filter } from "../../components";
+import { Search, Filter, Pagination } from "../../components";
 import { states } from "./states"
 
 /**
@@ -9,19 +9,21 @@ import { states } from "./states"
 function Body({content}) {
     return content.length > 0 ? (
         <table>
-          {content.map(restaurant => {
-            return (
-                <tr key={restaurant.id}>
-                    <td>{restaurant.name}</td>
-                    <td>{restaurant.city}</td>
-                    <td>{restaurant.state}</td>
-                    <td>{restaurant.telephone}</td>
-                    <td>{restaurant.genre}</td>
-                </tr>
-            );
-          })}
+            <tbody>
+                {content.map(restaurant => {
+                    return (
+                        <tr key={restaurant.id}>
+                            <td>{restaurant.name}</td>
+                            <td>{restaurant.city}</td>
+                            <td>{restaurant.state}</td>
+                            <td>{restaurant.telephone}</td>
+                            <td>{restaurant.genre}</td>
+                        </tr>
+                    );
+                })}
+            </tbody>
         </table>
-      ) : null;
+      ) : <h2>No results were found</h2>;
 }
 
 /**
@@ -61,6 +63,7 @@ function getControlObj(val, control, extension) {
 export const Table = ({content}) => {
     const genres = collectGenres(content)
     const [search, setSearch] = useState('')
+    const [page, setPage] = useState([0, 10])
     const [stateFilter, setStateFilter] = useState('')
     const [genreFilter, setGenreFilter] = useState('')
     const [filteredRestaurants, setFilteredRestaurants] = useState([])
@@ -77,16 +80,23 @@ export const Table = ({content}) => {
                 return false
             }
 
-            return new String(name + city + genre).toLowerCase().includes(search.toLowerCase())
+            return (name + city + genre).toLowerCase().includes(search.toLowerCase())
         }))
-    }, [search, stateFilter, genreFilter])
+        // reset pagination
+        setPage([0, 10]);
+    }, [search, stateFilter, genreFilter, content])
+
+    const paginate = (content) => {
+        return content.length > 0 ? content.slice(page[0], page[1]) : content
+    }
 
     return (
         <div>
             <Search controls={getControlObj(search, setSearch)}/>
             <Filter content={states} controls={getControlObj(stateFilter, setStateFilter)}/>
             <Filter content={genres} controls={getControlObj(genreFilter, setGenreFilter)}/>
-            <Body content={filteredRestaurants}/>
+            <Body content={paginate(filteredRestaurants)}/>
+            <Pagination content={filteredRestaurants} controls={getControlObj(page, setPage)}/>
         </div>
     )
 };
