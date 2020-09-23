@@ -4,6 +4,6 @@ import App from './App';
 import './App.scss';
 
 render(
-    <App title="Charter/Spectrum Front-End Code Challenge"/>,
+    <App/>,
   document.getElementById('root')
 );
