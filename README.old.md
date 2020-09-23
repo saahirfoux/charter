@@ -1,2 +1,0 @@
-# charter
-Sprectrum Cod
