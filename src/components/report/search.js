@@ -15,7 +15,7 @@ export const Search = ({controls}) => {
     return (
         <div>
             <input
-                classname="search"
+                className="search"
                 type="text"
                 placeholder="Search"
                 value={searchInput}
