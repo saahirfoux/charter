@@ -21,10 +21,8 @@ export const Search = ({controls}) => {
                 value={searchInput}
                 onChange={e => setSearchInput(e.target.value)}
             />
-            <button 
-                onClick={handleSubmit}>Ok</button>
-            <button 
-                onClick={handleCancel}>Cancel</button>
+            <button onClick={handleSubmit}>Ok</button>
+            <button onClick={handleCancel}>Cancel</button>
         </div>
     )
 };

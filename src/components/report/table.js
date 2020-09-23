@@ -61,21 +61,31 @@ function getControlObj(val, control, extension) {
 export const Table = ({content}) => {
     const genres = collectGenres(content)
     const [search, setSearch] = useState('')
+    const [stateFilter, setStateFilter] = useState('')
+    const [genreFilter, setGenreFilter] = useState('')
     const [filteredRestaurants, setFilteredRestaurants] = useState([])
 
     useEffect(() => {
         setFilteredRestaurants(content.filter( restaurant => {
-            let {name,city,state,telephone,genre} = restaurant;
-            return new String(name + city + state + telephone + genre).toLowerCase().includes(search.toLowerCase())
+            let {name,city,state,genre} = restaurant;
+
+            if (!state.includes(stateFilter)) {
+                return false
+            }
+
+            if (!genre.includes(genreFilter)) {
+                return false
+            }
+
+            return new String(name + city + genre).toLowerCase().includes(search.toLowerCase())
         }))
-    }, [search])
+    }, [search, stateFilter, genreFilter])
 
     return (
         <div>
             <Search controls={getControlObj(search, setSearch)}/>
-            <Filter content={states} controls={getControlObj(filteredRestaurants, setFilteredRestaurants)}/>
-            <Filter content={genres} controls={getControlObj(filteredRestaurants, setFilteredRestaurants)}/>
-
+            <Filter content={states} controls={getControlObj(stateFilter, setStateFilter)}/>
+            <Filter content={genres} controls={getControlObj(genreFilter, setGenreFilter)}/>
             <Body content={filteredRestaurants}/>
         </div>
     )
