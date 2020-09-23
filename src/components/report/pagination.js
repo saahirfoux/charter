@@ -1,9 +1,54 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-export const Pagination = () => {
+export const Pagination = ({content, controls}) => {
+    const MaxVisibleRecords = 10;
+    const MaxPage = Math.ceil(content.length / MaxVisibleRecords);
+    let [currentPage, setCurrentPage] = useState(1);
+
+    const handlePrevious = () => {
+        let start = 0;
+        let end = MaxVisibleRecords;
+        if (currentPage > 1 ) {
+            setCurrentPage(currentPage - 1)
+            if (currentPage - 1 !== 1) {    
+                for (let x = 0; x < currentPage - 1; x++ ) {
+                    start += MaxVisibleRecords;
+                    end += MaxVisibleRecords;
+                }
+            }
+    
+            controls.set([start,end]);
+        }
+    }
+    const handleNext = () => {
+        let start = 0;
+        let end = MaxVisibleRecords;
+        if (currentPage < MaxPage ) {
+            setCurrentPage(currentPage + 1)
+
+            for (let x = 0; x < currentPage; x++ ) {
+                start += MaxVisibleRecords;
+                end += MaxVisibleRecords;
+            }
+    
+            end = end > content.length ? content.length : end;
+
+            controls.set([start,end]);
+        }
+    }
+
+    // reset current page to 1 when a new filter is changed
+    useEffect(() => {
+        if (controls.value[0] === 0) {
+            setCurrentPage(1)
+        }
+    }, [controls.value])
+
     return (
-        <div>
-            Pagination
+        <div className="pagination">
+            <button onClick={handlePrevious}>Prev</button>
+            Page {currentPage} of {MaxPage}
+            <button onClick={handleNext}>Next</button>
         </div>
     )
 };
