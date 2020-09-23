@@ -9,6 +9,15 @@ import { states } from "./states"
 function Body({content}) {
     return content.length > 0 ? (
         <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Telephone</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
             <tbody>
                 {content.map(restaurant => {
                     return (
