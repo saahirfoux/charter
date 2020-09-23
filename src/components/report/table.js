@@ -91,39 +91,53 @@ export const Table = ({content}) => {
     const [genreFilter, setGenreFilter] = useState('')
     const [attireFilter, setAttireFilter] = useState('')
     const [filteredRestaurants, setFilteredRestaurants] = useState([])
+    const [isFilterActive, setFilterStatus] = useState(true)
+    let filterStatusText = isFilterActive ? "Disable Filters" : "Enable Filters"
 
     useEffect(() => {
         setFilteredRestaurants(content.filter( restaurant => {
             let {name,city,state,genre, attire} = restaurant;
+            if (isFilterActive) {
+                if (!state.includes(stateFilter)) {
+                    return false
+                }
 
-            if (!state.includes(stateFilter)) {
-                return false
-            }
+                if (!genre.includes(genreFilter)) {
+                    return false
+                }
 
-            if (!genre.includes(genreFilter)) {
-                return false
-            }
-
-            if (!attire.includes(attireFilter)) {
-                return false
+                if (!attire.includes(attireFilter)) {
+                    return false
+                }
             }
 
             return (name + city + genre).toLowerCase().includes(search.toLowerCase())
         }))
         // reset pagination
         setPage([0, 10]);
-    }, [search, stateFilter, genreFilter, attireFilter, content])
+    }, [search, stateFilter, genreFilter, attireFilter, isFilterActive, content])
 
     const paginate = (content) => {
         return content.length > 0 ? content.slice(page[0], page[1]) : content
     }
 
+    const handleFilterStatus = () => {
+        setFilterStatus(!isFilterActive);
+    }
+
     return (
         <div>
             <Search controls={getControlObj(search, setSearch)}/>
-            <Filter content={states} controls={getControlObj(stateFilter, setStateFilter)}/>
-            <Filter content={genres} controls={getControlObj(genreFilter, setGenreFilter)}/>
-            <Filter content={attire} controls={getControlObj(attireFilter, setAttireFilter)}/>
+            <div className="filter__container">
+                <div className="filter__group">
+                    <Filter content={states} controls={getControlObj(stateFilter, setStateFilter)}/>
+                    <Filter content={genres} controls={getControlObj(genreFilter, setGenreFilter)}/>
+                    <Filter content={attire} controls={getControlObj(attireFilter, setAttireFilter)}/>
+                </div>
+                <div className="filter__control">
+                    <span onClick={handleFilterStatus}>{filterStatusText}</span>
+                </div>
+            </div>
             <Body content={paginate(filteredRestaurants)}/>
             <Pagination content={filteredRestaurants} controls={getControlObj(page, setPage)}/>
         </div>
