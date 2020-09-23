@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Filter = ({content, controls, type, options, sFilter, gFilter}) => {
+export const Filter = ({content, controls}) => {
 
     const DefaultFilter = '';
     const SelectDropDown = ({content}) => {
