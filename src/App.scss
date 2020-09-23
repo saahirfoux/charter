@@ -67,3 +67,10 @@ button {
 	from { opacity: 1; }
 	to { opacity: 0; }
 }
+
+.filter__control {
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    color: blue;
+}
