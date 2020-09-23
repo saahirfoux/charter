@@ -7,7 +7,7 @@ export const Filter = ({content, controls}) => {
     }
     useEffect(() => {
         controls.set(selected)
-    }, [selected])
+    }, [selected, controls])
 
     return content.length > 0 ? (
         <select onChange={handleChange} value={selected}>
