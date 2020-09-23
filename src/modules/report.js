@@ -10,12 +10,8 @@ const Options = {
 };
 
 export const Report = () => {
-    let genreSet = new Set();
     const [report, setReport] = useState([]);
     const [isLoading, setLoading] = useState(true);
-    const [genres, setGenres] = useState([]);
-
-
     const fetchData = async () => {
         const data = await fetch(Url, Options).then(response => response.json());
         data.sort((a,b) => {return a.name.localeCompare(b.name)})
