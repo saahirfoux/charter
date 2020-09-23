@@ -45,9 +45,9 @@ export const Pagination = ({content, controls}) => {
     }, [controls.value])
 
     return (
-        <div className="pagination">
+        <div className="pagination__container">
             <button onClick={handlePrevious}>Prev</button>
-            Page {currentPage} of {MaxPage}
+            <span className="pagination__index">Page {currentPage} of {MaxPage}</span>
             <button onClick={handleNext}>Next</button>
         </div>
     )
