@@ -1,5 +1,5 @@
 import React from 'react';
-import { Report } from "./Modules";
+import { Report } from "./modules";
 
 
 function App() {
