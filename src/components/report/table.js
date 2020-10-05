@@ -6,7 +6,10 @@ import { states } from "./states"
  * @summary unique child component of Table
  * @param {*} param
  */
-function Body({content}) {
+function Body({content, onSelectDetails}) {
+    const handleRowSelection = (restaurant) => {
+        onSelectDetails(restaurant);
+    }
     return content.length > 0 ? (
         <table>
             <thead>
@@ -21,7 +24,7 @@ function Body({content}) {
             <tbody>
                 {content.map(restaurant => {
                     return (
-                        <tr key={restaurant.id}>
+                        <tr key={restaurant.id} onClick={() => handleRowSelection(restaurant)}>
                             <td>{restaurant.name}</td>
                             <td>{restaurant.city}</td>
                             <td>{restaurant.state}</td>
@@ -82,7 +85,7 @@ function getControlObj(val, control, extension) {
     }
 }
 
-export const Table = ({content}) => {
+export const Table = ({content, onSelectImage, onSelectDetails}) => {
     const genres = createGenresList(content)
     const attire = createAttireList(content)
     const [search, setSearch] = useState('')
@@ -115,6 +118,8 @@ export const Table = ({content}) => {
         }))
         // reset pagination
         setPage([0, 10]);
+
+        onSelectImage(Math.floor(Math.random() * 11))
     }, [search, stateFilter, genreFilter, attireFilter, isFilterActive, content])
 
     const paginate = (content) => {
@@ -126,7 +131,7 @@ export const Table = ({content}) => {
     }
 
     return (
-        <div>
+        <div className="table__container">
             <Search controls={getControlObj(search, setSearch)}/>
             <div className="filter__container">
                 <div className="filter__group">
@@ -138,7 +143,7 @@ export const Table = ({content}) => {
                     <span onClick={handleFilterStatus}>{filterStatusText}</span>
                 </div>
             </div>
-            <Body content={paginate(filteredRestaurants)}/>
+            <Body content={paginate(filteredRestaurants)} onSelectDetails={onSelectDetails}/>
             <Pagination content={filteredRestaurants} controls={getControlObj(page, setPage)}/>
         </div>
     )

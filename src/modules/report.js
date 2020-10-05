@@ -9,7 +9,7 @@ const Options = {
     }
 };
 
-export const Report = () => {
+export const Report = ({onSelectImage, onSelectDetails}) => {
     const [report, setReport] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const fetchData = async () => {
@@ -28,8 +28,6 @@ export const Report = () => {
     }
     
     return (
-        <div>
-            <Table content={report} />
-        </div>
+        <Table content={report} onSelectImage={onSelectImage} onSelectDetails={onSelectDetails}/>
     )
 }
