@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    align-items: center;
+    padding: 30px 10%;
+    background: linear-gradient(to top, #002f58 0%, #001d36);
+    .logo {
+        cursor: pointer;
+    }
+    .nav__links li {
+        display: inline-block;
+        padding: 0px 20px;
+        a {
+            transition: all 0.3s ease 0s;
+            color: white;
+        }
+        a:hover {
+            color: #0088a9;
+        }
+    }
+}

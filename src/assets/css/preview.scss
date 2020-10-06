@@ -1,0 +1,66 @@
+.preview__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preview__container.one {
+    background-image: url("../1.png"); 
+    background-size: cover;
+}
+.preview__container.two {
+    background-image: url("../2.png"); 
+    background-size: cover;
+}
+.preview__container.three {
+    background-image: url("../3.png"); 
+    background-size: cover;
+}
+.preview__container.four {
+    background-image: url("../4.png"); 
+    background-size: cover;
+}
+.preview__container.five {
+    background-image: url("../5.png"); 
+    background-size: cover;
+}
+.preview__container.six {
+    background-image: url("../6.png"); 
+    background-size: cover;
+}
+.preview__container.seven {
+    background-image: url("../7.png"); 
+    background-size: cover;
+}
+.preview__container.eight {
+    background-image: url("../8.png"); 
+    background-size: cover;
+}
+.preview__container.nine {
+    background-image: url("../9.png"); 
+    background-size: cover;
+}
+.preview__container.ten {
+    background-image: url("../10.png"); 
+    background-size: cover;
+}
+.preview__container.eleven {
+    background-image: url("../11.png"); 
+    background-size: cover;
+}
+.preview__container.twelve {
+    background-image: url("../12.png"); 
+    background-size: cover;
+}
+.preview__card {
+    border-top-left-radius: 50px 20px; 
+    border-top-right-radius: 20px 50px;
+    border-bottom-right-radius: 50px 20px;
+    border-bottom-left-radius: 20px 50px;
+    align-self: flex-end;
+    margin-bottom: 15%;
+    background-color: white;
+    width: 300px;
+    height:200px;
+    background-image: url("../grey-texture.svg");
+    padding: 1em;
+}

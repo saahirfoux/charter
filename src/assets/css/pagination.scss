@@ -1,0 +1,17 @@
+.pagination__container {
+    display:flex;
+    justify-content: space-between;
+    button {
+        width: 40%;
+    }
+}
+.pagination__container.pagination__start {
+    button:first-child {
+        opacity: 0;
+    }
+}
+.pagination__container.pagination__end {
+    button:last-child {
+        opacity: 0;
+    }
+}
